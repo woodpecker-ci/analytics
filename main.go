@@ -8,11 +8,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/influxdata/influxdb-client-go/v2"
+	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 )
 
 func main() {
 	client := influxdb2.NewClient("http://localhost:8086", "my-token")
+	defer client.Close()
+
 	writeAPI := client.WriteAPIBlocking("woodpecker", "analytics")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -36,6 +38,4 @@ func main() {
 	})
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
-
-	client.Close()
 }
