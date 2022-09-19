@@ -2,7 +2,7 @@ variables:
   - &golang 'golang:1.19'
 
 pipeline:
-  test:
+  build:
     image: *golang
     commands:
-      - go test ./...
+      - go build
