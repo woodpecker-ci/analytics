@@ -1,7 +1,7 @@
 variables:
   - &golang 'golang:1.21'
 
-pipeline:
+steps:
   test:
     image: *golang
     commands:
